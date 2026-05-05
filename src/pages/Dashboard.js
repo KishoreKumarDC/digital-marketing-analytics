@@ -14,7 +14,7 @@ import { db, auth } from "../services/firebase";
 import {
   AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell,
   LineChart, Line, RadarChart, Radar, PolarGrid, PolarAngleAxis,
-  XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer, Legend,
+  XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer,
 } from "recharts";
 import "./dashboard.css";
 
