@@ -1,0 +1,186 @@
+:root {
+  --bg-image: url('./marketing-bg.jpg');
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --input-bg: rgba(255, 255, 255, 0.08);
+  --primary-blue: #d42525;
+  --text-dim: rgba(255, 255, 255, 0.65);
+  /* Smooth easing function for all transitions */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent; /* Removes blue flash on mobile tap */
+}
+
+.login-container {
+  width: 100%;
+  min-height: 100vh; /* Better than 100vh for mobile browsers with toolbars */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Inter', system-ui, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+  padding: 20px; /* Prevents card touching screen edges on mobile */
+  background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), 
+              var(--bg-image) no-repeat center center / cover;
+}
+
+/* 💎 THE GLASS CARD */
+.glass-card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  padding: clamp(30px, 5vw, 50px); /* Responsive padding */
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-radius: 28px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+/* ✨ IMPROVED SHINE ANIMATION (Using transform for performance) */
+.glass-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: glass-shimmer 8s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes glass-shimmer {
+  0% { transform: translateX(0) skewX(-20deg); }
+  20%, 100% { transform: translateX(300%) skewX(-20deg); }
+}
+
+.title {
+  color: #fff;
+  font-size: clamp(24px, 5vw, 30px);
+  margin-bottom: 25px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* 🔁 TOGGLE NAVIGATION - Better Touch Targets */
+.toggle {
+  display: flex;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 14px;
+  padding: 6px;
+  margin-bottom: 25px;
+  border: 1px solid var(--glass-border);
+}
+
+.toggle button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: var(--transition-smooth);
+  border-radius: 10px;
+}
+
+.toggle button.active {
+  background: var(--primary-blue);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 198, 255, 0.4);
+}
+
+/* 📦 INPUTS */
+input {
+  width: 100%;
+  background: var(--input-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  padding: 16px; /* Larger hit area for fingers */
+  color: #fff;
+  font-size: 16px; /* Prevents iOS auto-zoom on focus */
+  outline: none;
+  transition: var(--transition-smooth);
+  margin-bottom: 16px;
+}
+
+input:focus {
+  border-color: var(--primary-blue);
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px); /* Subtle lift */
+}
+
+/* 🔘 BUTTONS */
+button[title="Login"], 
+button[title="Login with Google"] {
+  width: 100%;
+  padding: 16px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  border: none;
+  margin-top: 10px;
+}
+
+button[title="Login"]:active {
+  transform: scale(0.98); /* Tactile feedback */
+}
+
+/* 🔗 LINKS */
+.links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+.links span {
+  padding: 5px; /* Bigger hit area */
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+/* 🏷️ HEADLINE STYLING */
+.main-headline {
+  position: relative; /* Changed from absolute for better document flow on mobile */
+  margin-bottom: 20px;
+  font-size: clamp(2rem, 8vw, 4rem);
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.9);
+  
+  /* Modern Text Stroke / Glass Effect */
+  background: linear-gradient(to bottom, #fff 30%, rgba(255,255,255,0.1));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+}
+
+/* Animation performance optimization */
+@media (prefers-reduced-motion: reduce) {
+  .glass-card::before, .main-headline {
+    animation: none;
+  }
+}
