@@ -565,25 +565,7 @@ export default function Admin() {
   /* ── User management ── */
 const ROLES = ["user", "manager", "admin"];
 
-// 🚀 DIRECT PROMOTION TO ADMIN
-const handlePromoteAdmin = async (u) => {
-  confirmDlg(
-    "Promote to Administrator",
-    `Are you sure you want to grant full Admin access to "${u.email}"?`,
-    "Promote",
-    async () => {
-      try {
-        await updateDoc(doc(db, "users", u.id), { role: "admin" });
-        toast(`${u.email} is now an Admin 👑`, "success");
-        logAction("PROMOTE_ADMIN", `${u.email} → admin`);
-        setSelectedUser(null);
-        fetchUsers();
-      } catch (error) {
-        toast("Promotion failed: " + error.message, "error");
-      }
-    }
-  );
-};
+
 
 const handlePromote = async (u) => {
   const newRole = ROLES[Math.min(ROLES.indexOf(u.role || "user") + 1, ROLES.length - 1)];
