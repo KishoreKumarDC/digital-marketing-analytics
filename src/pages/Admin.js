@@ -413,7 +413,7 @@ export default function Admin() {
     } catch { setHealth({ status:"degraded", latency:null }); }
   };
 
-  useEffect(() => { fetchCampaigns(); fetchUsers(); checkHealth(); }, []);
+  useEffect(() => { fetchCampaigns(); fetchUsers(); checkHealth(); }, [fetchCampaigns, fetchUsers]);
 
   /* ── Campaign CRUD ── */
   const openNew   = ()  => { setForm(EMPTY_FORM); setEditId(null); setShowForm(true); };

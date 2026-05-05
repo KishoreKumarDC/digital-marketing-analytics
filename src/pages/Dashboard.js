@@ -414,7 +414,7 @@ export default function Dashboard() {
       }
     );
     return () => unsub();
-  }, []);
+  }, [showToast]);
 
   /* ── Aggregate metrics ── */
   const totReach  = campaigns.reduce((a,c) => a+(Number(c.reach)||0), 0);
