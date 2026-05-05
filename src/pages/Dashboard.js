@@ -771,7 +771,12 @@ export default function Dashboard() {
                     </table>
                   </div>
                 )}
+                
               </div>
+              {/* AI Panel — mobile only (desktop uses sidebar) */}
+<div className="show-mobile">
+  <AiPanel campaigns={campaigns} showToast={showToast}/>
+</div>
             </>
           )}
 

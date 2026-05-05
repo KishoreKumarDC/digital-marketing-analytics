@@ -3,7 +3,7 @@
   --glass-bg: rgba(255, 255, 255, 0.06);
   --glass-border: rgba(255, 255, 255, 0.12);
   --input-bg: rgba(255, 255, 255, 0.08);
-  --primary-blue: #d42525;
+  --primary-blue: #2499b6;
   --text-dim: rgba(255, 255, 255, 0.65);
   /* Smooth easing function for all transitions */
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -183,4 +183,62 @@ button[title="Login"]:active {
   .glass-card::before, .main-headline {
     animation: none;
   }
+}
+
+.password-field-container input {
+  padding-right: 45px !important; /* Makes room for the eye icon */
+}
+
+.password-toggle-icon {
+  user-select: none;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.password-toggle-icon:hover {
+  opacity: 1;
+}
+.password-toggle-btn:hover {
+  color: #333 !important; /* Darkens the icon on hover */
+}
+
+.password-field-container input {
+  padding-right: 45px !important; /* Prevents text from overlapping the icon */
+}
+
+/* 🏛️ PROFESSIONAL TITLE STYLING */
+.title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.title-icon {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #60a5fa; /* Professional blue tone */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.title-text {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.15em; /* Elegant spacing */
+  text-transform: uppercase;
+  color: #f8fafc;
+  background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Inter', sans-serif; /* Recommended professional font */
+}
+
+/* Optional: Slight pulse to the icon for a "live" feel */
+.title-icon svg {
+  filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.4));
 }

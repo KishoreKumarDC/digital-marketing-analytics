@@ -900,3 +900,136 @@ body {
   }
 }
 
+/* ══════════════════════════════════════════════════════════════
+   dashboard_patch.css  —  2 targeted fixes only
+   Paste at the VERY END of dashboard.css
+══════════════════════════════════════════════════════════════ */
+
+/* ────────────────────────────────────────────────────────────
+   FIX 1 · GROWTH SIMULATOR
+   Problem: db-grid-2 with gridTemplateColumns "2fr 1fr" on
+   mobile squashes the right-hand simulator card to ~120 px,
+   causing numbers like "1,13,116.9" to wrap/truncate.
+   Fix A: break the 2-column grid to single-column on mobile.
+   Fix B: force sim-rows to always be 1 column (never 2).
+   Fix C: keep each row as horizontal label↔value pair.
+──────────────────────────────────────────────────────────────*/
+
+/* Override the inline style gridTemplateColumns:"2fr 1fr" */
+@media (max-width: 767px) {
+  .db-grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Always single-column result list — kills the cramped 2-col grid */
+.db-sim-rows {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 7px !important;
+}
+
+/* Each row: label on left, value on right, never wraps */
+.db-sim-row {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 9px 13px !important;
+  gap: 8px !important;
+}
+
+.db-sim-label {
+  flex: 1 !important;
+  font-size: 11px !important;
+  min-width: 0 !important;
+  white-space: normal !important;
+}
+
+.db-sim-value {
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+@media (max-width: 767px) {
+  .db-sim-label { font-size: 10px !important; }
+  .db-sim-value { font-size: 14px !important; }
+}
+
+/* ────────────────────────────────────────────────────────────
+   FIX 2 · AI PANEL — hide the desktop sidebar on mobile
+   (The panel is moved into JSX inside the overview tab.
+    This CSS hides the original outside-<main> instance on
+    mobile so it doesn't double-render.)
+   See Dashboard.jsx change below.
+──────────────────────────────────────────────────────────────*/
+
+/* The panel outside <main> stays for desktop; hide on mobile */
+.db-shell > .db-ai-panel {
+  /* default: visible on desktop (no change) */
+}
+
+@media (max-width: 767px) {
+  /* Hide the sidebar AI panel — the in-content copy is shown */
+  .db-shell > .db-ai-panel {
+    display: none !important;
+  }
+  /* Hide FAB + backdrop — no longer needed */
+  .db-ai-fab,
+  .db-ai-fab-label,
+  .db-ai-backdrop {
+    display: none !important;
+  }
+  /* In-content AI panel: reset all bottom-sheet positioning */
+  .db-content .db-ai-panel {
+    position: static !important;
+    transform: none !important;
+    pointer-events: all !important;
+    width: 100% !important;
+    max-height: none !important;
+    height: auto !important;
+    border-radius: var(--border-r) !important;
+    border: 1px solid var(--gb) !important;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.40),
+                inset 0 1px 0 rgba(255,255,255,0.06) !important;
+    background: rgba(0,0,0,0.55) !important;
+    backdrop-filter: blur(25px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(25px) saturate(150%) !important;
+    transition: none !important;
+    margin-bottom: 16px;
+  }
+  /* Restore the top gradient line (overrides drag-handle ::before) */
+  .db-content .db-ai-panel::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important; left: 0 !important; right: 0 !important;
+    width: auto !important; height: 1px !important;
+    border-radius: 0 !important;
+    background: linear-gradient(
+      90deg, transparent, rgba(0,198,255,0.35), transparent
+    ) !important;
+    margin: 0 !important;
+    display: block !important;
+  }
+  .db-content .db-ai-panel .db-chat-window {
+    max-height: 240px;
+  }
+  /* Prompt chips: horizontal scroll */
+  .db-content .db-ai-panel .db-prompt-list {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+    padding: 6px 14px 10px !important;
+  }
+  .db-content .db-ai-panel .db-prompt-list::-webkit-scrollbar {
+    display: none;
+  }
+  .db-content .db-ai-panel .db-prompt-btn {
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+  }
+}
