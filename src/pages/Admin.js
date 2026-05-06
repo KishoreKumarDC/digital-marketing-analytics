@@ -15,6 +15,19 @@ import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "./dashboard.css";
 
+function useTheme() {
+  const [dark, setDark] = useState(() => {
+    const saved = localStorage.getItem("nexus-theme");
+    if (saved) return saved === "dark";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  });
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", dark);
+    localStorage.setItem("nexus-theme", dark ? "dark" : "light");
+  }, [dark]);
+  return { dark, toggle: () => setDark(d => !d) };
+}
+
 /* ════════════════════════════════════════════════════════════════
    CONSTANTS
 ════════════════════════════════════════════════════════════════ */
@@ -329,6 +342,9 @@ function SortTh({ label, k, sortKey, sortDir, onSort }) {
 export default function Admin() {
   const navigate = useNavigate();
   const user     = auth.currentUser;
+
+
+  const { dark, toggle } = useTheme();
 
   const [tab,        setTab]        = useState("campaigns");
   const [campaigns,  setCampaigns]  = useState([]);
@@ -682,7 +698,26 @@ const handleRevoke = (u) => {
                  system:"Firestore health & diagnostics" }[tab]}
             </span>
           </div>
-          <span className="pill pill-amber">Admin Mode</span>
+          <div className="flex-gap-6">
+  <button
+    className="db-theme-toggle"
+    onClick={toggle}
+    aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
+    type="button"
+  >
+    <span className="db-theme-label">{dark ? "Dark" : "Light"}</span>
+    <div className="db-theme-track">
+      <div className={`db-theme-pill ${dark ? "at-dark" : "at-light"}`} />
+      <div className={`db-theme-option ${!dark ? "active" : ""}`}>
+        <span className="db-theme-sun">☀️</span>
+      </div>
+      <div className={`db-theme-option ${dark ? "active" : ""}`}>
+        <span className="db-theme-moon">🌙</span>
+      </div>
+    </div>
+  </button>
+  <span className="pill pill-amber">Admin Mode</span>
+</div>
         </div>
 
         <div className="db-content">

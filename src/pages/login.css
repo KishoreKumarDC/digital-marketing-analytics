@@ -3,7 +3,7 @@
   --glass-bg: rgba(255, 255, 255, 0.06);
   --glass-border: rgba(255, 255, 255, 0.12);
   --input-bg: rgba(255, 255, 255, 0.08);
-  --primary-blue: #2499b6;
+  --primary-blue: #a9160b;
   --text-dim: rgba(255, 255, 255, 0.65);
   /* Smooth easing function for all transitions */
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

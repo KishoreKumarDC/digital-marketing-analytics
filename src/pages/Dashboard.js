@@ -18,6 +18,18 @@ import {
 } from "recharts";
 import "./dashboard.css";
 
+function useTheme() {
+  const [dark, setDark] = useState(() => {
+    const saved = localStorage.getItem("nexus-theme");
+    if (saved) return saved === "dark";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  });
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", dark);
+    localStorage.setItem("nexus-theme", dark ? "dark" : "light");
+  }, [dark]);
+  return { dark, toggle: () => setDark(d => !d) };
+}
 
 
 /* ════════════════════════════════════════════════════════════════
@@ -382,6 +394,10 @@ export default function Dashboard() {
   const navigate  = useNavigate();
   const user      = auth.currentUser;
 
+  
+  const { dark, toggle } = useTheme();
+
+
   const [tab,         setTab]         = useState("overview");
   const [campaigns,   setCampaigns]   = useState([]);
   const [loading,     setLoading]     = useState(true);
@@ -581,6 +597,7 @@ export default function Dashboard() {
         </div>
       </aside>
 
+    
       {/* ══ MAIN ══ */}
       <main className="db-main">
         <div className="db-topbar">
@@ -589,8 +606,29 @@ export default function Dashboard() {
             <span className="db-topbar-sub">{topbarMeta[tab]}</span>
           </div>
           <div className="flex-gap-6">
+  {/* ── Theme Toggle ── */}
+  <button
+    className="db-theme-toggle"
+    onClick={toggle}
+    aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
+    type="button"
+  >
+    <span className="db-theme-label">{dark ? "Dark" : "Light"}</span>
+    <div className="db-theme-track">
+      <div className={`db-theme-pill ${dark ? "at-dark" : "at-light"}`} />
+      <div className={`db-theme-option ${!dark ? "active" : ""}`}>
+        <span className="db-theme-sun">☀️</span>
+      </div>
+      <div className={`db-theme-option ${dark ? "active" : ""}`}>
+        <span className="db-theme-moon">🌙</span>
+      </div>
+    </div>
+  </button>
+  <span className="db-engine-tag">Engine v4.2 · 2026</span>
+</div>
+          {/* <div className="flex-gap-6">
             <span className="db-engine-tag">Engine v4.2 · 2026</span>
-          </div>
+          </div> */}
         </div>
 
         <div className="db-content">
