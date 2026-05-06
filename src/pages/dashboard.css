@@ -123,10 +123,11 @@ body.dark {
   -webkit-text-fill-color: transparent;
 }
 .dark .db-ai-panel {
-  background: rgba(0,0,0,0.60);
-  border-left: 1px solid var(--gb);
-  box-shadow: -2px 0 20px rgba(0,0,0,0.40);
+  background: rgba(0, 0, 0, 0.75) !important;
+  border-left: 1px solid var(--gb) !important;
+  box-shadow: -2px 0 20px rgba(0,0,0,0.55);
 }
+
 .dark .db-user-card {
   background: var(--glass);
   border: 1px solid var(--gb);
@@ -292,7 +293,7 @@ body.dark {
 /* ════════════════════════════════════════════════
    RESET
 ════════════════════════════════════════════════ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin:0; padding: 0; }
 ::-webkit-scrollbar           { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track     { background: transparent; }
 ::-webkit-scrollbar-thumb     { background: rgba(229,57,53,0.22); border-radius: 4px; }

@@ -744,9 +744,9 @@ const handleRevoke = (u) => {
           {tab==="campaigns" && (
             <>
               {/* Toolbar */}
-              <div className="glass" style={{ display:"flex", alignItems:"center", gap:10, padding:"10px 14px", marginBottom:12, flexWrap:"wrap" }}>
+              <div className="glass" style={{ display:"flex", alignItems:"center", gap:10, padding:"10px 14px", marginBottom:10, flexWrap:"wrap" }}>
                 {/* Search */}
-               {/* Search - Adjusted Size */}
+
 <div style={{ position: "relative", flex: 2, minWidth: 250, maxWidth: 400 }}>
   <span style={{ position: "absolute", left: 10, top: "50%", transform: "translateY(-50%)", color: "var(--muted)", display: "flex", alignItems: "center", pointerEvents: "none" }}>
     <Icon d={IC.search} size={14}/>
