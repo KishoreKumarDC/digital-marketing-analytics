@@ -86,8 +86,10 @@
 /* Dark mode element overrides */
 .dark body,
 body.dark {
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
+
 .dark input[type="date"] { color-scheme: dark; }
 .dark select option      { background: #0a0a1a; color: #ffffff; }
 
