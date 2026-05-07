@@ -1286,3 +1286,26 @@ body {
     white-space: nowrap !important;
   }
 }
+
+/* FINAL MOBILE AI PANEL FIX */
+
+@media (max-width: 767px) {
+
+  .dark .db-ai-panel,
+  .dark .db-chat-window,
+  .dark .db-chat-input-row,
+  .dark .db-chat-bubble,
+  .dark .db-prompt-list {
+    opacity: 1 !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+  }
+
+  .dark .db-ai-panel * {
+    opacity: 1 !important;
+  }
+
+  .dark .db-ai-panel {
+    background: #301b1c !important;
+  }
+}
